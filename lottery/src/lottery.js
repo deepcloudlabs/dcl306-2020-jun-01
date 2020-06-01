@@ -1,5 +1,6 @@
 import * as React from "react";
 import PropTypes from 'prop-types';
+import LotteryRow from "./lottery-row";
 
 export default class Lottery extends React.Component {
     static propTypes = {
@@ -42,16 +43,10 @@ export default class Lottery extends React.Component {
                         </tr>
                         </thead>
                         <tbody>{
-                            this.state.numbers.map((lotteryNumber, i) => <tr key={i}>
-                                <td>{i + 1}</td>
-                                {lotteryNumber.map((num, j) =>
-                                    <td key={i * this.props.size + j}>{num}</td>)
-                                }
-                                <td>
-                                    <button  onClick={() => this.removeRow(i)}
-                                             className="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>)
+                            this.state.numbers.map((lotteryNumber, i) => <LotteryRow numbers={lotteryNumber}
+                                                                                               removeAction={this.removeRow}
+                                                                                               key={i * this.props.size}
+                                                                                               rowIndex={i}></LotteryRow>)
                         }</tbody>
                     </table>
                 </div>
