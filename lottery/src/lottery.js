@@ -46,7 +46,7 @@ export default class Lottery extends React.Component {
                             <tr>
                                 <th>No</th>
                                 {
-                                    Array.from(Array(6).keys()).map(column => <th>Column #{column+1}</th>)
+                                    Array.from(Array(6).keys()).map(column => <th key={'col'+column}>Column #{column+1}</th>)
                                 }
                                 <th>Operations</th>
                             </tr>
