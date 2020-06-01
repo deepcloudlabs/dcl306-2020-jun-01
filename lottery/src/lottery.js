@@ -23,7 +23,7 @@ export default class Lottery extends React.Component {
                         <tr>
                             <th>No</th>
                             {
-                                Array.from(Array(6).keys()).map(column => <th key={'col'+column}>Column #{column+1}</th>)
+                                Array.from(Array(Number(this.props.size)).keys()).map(column => <th key={'col'+column}>Column #{column+1}</th>)
                             }
                             <th>Operations</th>
                         </tr>
@@ -32,7 +32,7 @@ export default class Lottery extends React.Component {
                             this.state.numbers.map((lotteryNumber, i) => <tr key={i}>
                                 <td>{i + 1}</td>
                                 {lotteryNumber.map((num, j) =>
-                                    <td key={i * 6 + j}>{num}</td>)
+                                    <td key={i * this.props.size + j}>{num}</td>)
                                 }
                                 <td>
                                     <button  onClick={() => this.removeRow(i)}
@@ -102,12 +102,13 @@ export default class Lottery extends React.Component {
 
     createNumbers = () => {
         let array = [];
-        while (array.length < 6) {
-            let number = this.createNumber(1, 49);
+        while (array.length < this.props.size) {
+            let number = this.createNumber(Number(this.props.min), Number(this.props.max));
             if (!array.includes(number))
                 array.push(number);
         }
-        array.sort((x, y) => x - y);
+        if (this.props.sorted == "true")
+           array.sort((x, y) => x - y);
         return array;
     }
 

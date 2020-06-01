@@ -4,7 +4,7 @@ import Lottery from "./lottery";
 
 function App() {
   return (
-    <Lottery />
+    <Lottery min="1" max="100" size="8" sorted="false"/>
   );
 }
 
