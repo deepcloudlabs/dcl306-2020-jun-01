@@ -44,18 +44,23 @@ export default class Lottery extends React.Component {
                         <table className="table table-bordered table-hover table-striped table-responsive">
                             <thead>
                             <tr>
-                                <th>No</th>{
-                                    [1,2,3,4,5,6].map( column => <th>Column #{column}</th>)
+                                <th>No</th>
+                                {
+                                    [1, 2, 3, 4, 5, 6].map(column => <th>Column #{column}</th>)
                                 }
                                 <th>Operations</th>
                             </tr>
                             </thead>
                             <tbody>{
-                                 this.state.numbers.map( (lotteryNumber,i) => <tr key={i}>
-                                     <td>{i+1}</td>{lotteryNumber.map( (num,j) =>
+                                this.state.numbers.map((lotteryNumber, i) => <tr key={i}>
+                                    <td>{i + 1}</td>
+                                    {lotteryNumber.map((num, j) =>
                                         <td key={i * 6 + j}>{num}</td>)
-                                 }
-                                 <td><button className="btn btn-danger">Delete</button> </td></tr>)
+                                    }
+                                    <td>
+                                        <button className="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>)
                             }</tbody>
                         </table>
                     </div>
@@ -91,6 +96,17 @@ export default class Lottery extends React.Component {
     }
 
     createNumbers = () => {
-        return [1,2,3,4,5,6];
+        let array = [];
+        while (array.length < 6) {
+            let number = this.createNumber(1, 49);
+            if (!array.includes(number))
+                array.push(number);
+        }
+        array.sort((x, y) => x - y);
+        return array;
+    }
+
+    createNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
