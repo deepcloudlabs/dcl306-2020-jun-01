@@ -44,18 +44,18 @@ export default class Lottery extends React.Component {
                         <table className="table table-bordered table-hover table-striped table-responsive">
                             <thead>
                             <tr>
-                                <th>1<sup>st</sup> Number</th>
-                                <th>2<sup>nd</sup> Number</th>
-                                <th>3<sup>rd</sup> Number</th>
-                                <th>4<sup>th</sup> Number</th>
-                                <th>5<sup>th</sup> Number</th>
-                                <th>6<sup>th</sup> Number</th>
+                                <th>No</th>{
+                                    [1,2,3,4,5,6].map( column => <th>Column #{column}</th>)
+                                }
+                                <th>Operations</th>
                             </tr>
                             </thead>
                             <tbody>{
-                                 this.state.numbers.map( lotteryNumber => <tr>{ lotteryNumber.map( num =>
-                                        <td>{num}</td>)
-                                 }</tr>)
+                                 this.state.numbers.map( (lotteryNumber,i) => <tr key={i}>
+                                     <td>{i+1}</td>{lotteryNumber.map( (num,j) =>
+                                        <td key={i * 6 + j}>{num}</td>)
+                                 }
+                                 <td><button className="btn btn-danger">Delete</button> </td></tr>)
                             }</tbody>
                         </table>
                     </div>
@@ -81,7 +81,7 @@ export default class Lottery extends React.Component {
         }
         this.setState({
             numbers: lotteryNumbers
-        })
+        }) // -> render()
     }
 
     resetNumbers = () => {
