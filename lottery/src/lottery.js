@@ -1,6 +1,19 @@
 import * as React from "react";
+import PropTypes from 'prop-types';
 
 export default class Lottery extends React.Component {
+    static propTypes = {
+        min: PropTypes.number,
+        max: PropTypes.number,
+        size: PropTypes.number,
+        sorted: PropTypes.bool
+    }
+    static defaultProps = {
+        min: 1,
+        max: 49,
+        size: 6,
+        sorted: true
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -107,7 +120,7 @@ export default class Lottery extends React.Component {
             if (!array.includes(number))
                 array.push(number);
         }
-        if (this.props.sorted == "true")
+        if (this.props.sorted === true)
            array.sort((x, y) => x - y);
         return array;
     }
