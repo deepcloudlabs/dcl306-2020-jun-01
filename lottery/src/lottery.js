@@ -11,6 +11,39 @@ export default class Lottery extends React.Component {
 
     // View
     render() {
+        let table = "";
+        if (this.state.numbers.length > 0){
+            table =  <div className="card">
+                <div className="card-header">
+                    <h1 className="card-title">Lottery Numbers</h1>
+                </div>
+                <div className="card-body">
+                    <table className="table table-bordered table-hover table-striped table-responsive">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            {
+                                Array.from(Array(6).keys()).map(column => <th key={'col'+column}>Column #{column+1}</th>)
+                            }
+                            <th>Operations</th>
+                        </tr>
+                        </thead>
+                        <tbody>{
+                            this.state.numbers.map((lotteryNumber, i) => <tr key={i}>
+                                <td>{i + 1}</td>
+                                {lotteryNumber.map((num, j) =>
+                                    <td key={i * 6 + j}>{num}</td>)
+                                }
+                                <td>
+                                    <button  onClick={() => this.removeRow(i)}
+                                             className="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>)
+                        }</tbody>
+                    </table>
+                </div>
+            </div>;
+        }
         return (
             <div className="container">
                 <div className="card">
@@ -36,35 +69,7 @@ export default class Lottery extends React.Component {
                     </div>
                 </div>
                 <p></p>
-                <div className="card">
-                    <div className="card-header">
-                        <h1 className="card-title">Lottery Numbers</h1>
-                    </div>
-                    <div className="card-body">
-                        <table className="table table-bordered table-hover table-striped table-responsive">
-                            <thead>
-                            <tr>
-                                <th>No</th>
-                                {
-                                    Array.from(Array(6).keys()).map(column => <th key={'col'+column}>Column #{column+1}</th>)
-                                }
-                                <th>Operations</th>
-                            </tr>
-                            </thead>
-                            <tbody>{
-                                this.state.numbers.map((lotteryNumber, i) => <tr key={i}>
-                                    <td>{i + 1}</td>
-                                    {lotteryNumber.map((num, j) =>
-                                        <td key={i * 6 + j}>{num}</td>)
-                                    }
-                                    <td>
-                                        <button className="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>)
-                            }</tbody>
-                        </table>
-                    </div>
-                </div>
+                {table}
             </div>
         );
     }
@@ -108,5 +113,13 @@ export default class Lottery extends React.Component {
 
     createNumber = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    removeRow = (index) => {
+        let numbers = this.state.numbers;
+        numbers.splice(index,1);
+        this.setState({
+            numbers: numbers
+        });
     }
 }
