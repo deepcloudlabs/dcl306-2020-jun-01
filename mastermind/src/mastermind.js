@@ -1,5 +1,6 @@
 import * as React from "react";
 import GameStatistics from "./components/game-statistics";
+import ProgressBar from "./components/progressbar";
 
 class Move {
     constructor(guess, message, perfectMatch, partialMatch) {
@@ -12,13 +13,15 @@ class Move {
 }
 
 export default class Mastermind extends React.Component {
+    MAX_COUNTER = 100;
+
     constructor() {
         super();
         this.state = {
             gameLevel: 3,
             secret: 0,
             tries: 0,
-            counter: 100,
+            counter: this.MAX_COUNTER,
             guess: 123,
             moves: [],
             wins: 0,
@@ -52,9 +55,8 @@ export default class Mastermind extends React.Component {
                             </label>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="counter">Counter:
-                                <span className="badge badge-info">{this.state.counter}</span>
-                            </label>
+                            <label htmlFor="counter">Counter:</label>
+                            <ProgressBar value={this.state.counter}> </ProgressBar>
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
@@ -125,7 +127,7 @@ export default class Mastermind extends React.Component {
         game.tries = 0;
         game.moves = [];
         game.secret = this.createSecret(game.gameLevel);
-        game.counter = 100;
+        game.counter = this.MAX_COUNTER;
     }
 
     handleInputChange = (event) => {
@@ -137,9 +139,13 @@ export default class Mastermind extends React.Component {
         let counter = this.state.counter;
         counter--;
         if (counter <= 0) {
-            //TODO: Player loses this round!
-        }
+            let game = {...this.state};
+            game.loses++;
+            this.initGame(game);
+            this.setState(game);
+        } else {
         this.setState({counter: counter});
+        }
     }
 
     createSecret = (level) => {

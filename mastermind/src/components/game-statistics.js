@@ -24,11 +24,11 @@ export default class GameStatistics extends React.PureComponent {
                         <tbody>
                             <tr>
                                 <td>Wins</td>
-                                <td>5 out of 8</td>
+                                <td>{this.props.wins} out of {this.props.wins+this.props.loses}</td>
                             </tr>
                             <tr>
                                 <td>Loses</td>
-                                <td>3 out of 8</td>
+                                <td>{this.props.loses} out of {this.props.wins+this.props.loses}</td>
                             </tr>
                         </tbody>
                     </table>
