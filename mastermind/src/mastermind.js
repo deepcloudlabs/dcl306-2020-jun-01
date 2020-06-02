@@ -2,7 +2,10 @@ import * as React from "react";
 
 class Move {
     constructor(guess, message, perfectMatch, partialMatch) {
-
+        this.guess = guess;
+        this.message = message;
+        this.perfectMatch = perfectMatch;
+        this.partialMatch = partialMatch;
     }
 
 }
@@ -80,7 +83,16 @@ export default class Mastermind extends React.Component {
                                 <th>Evaluation</th>
                             </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>{
+                                this.state.moves.map((move, index) =>
+                                    <tr key={move.guess}>
+                                        <td>{index + 1}</td>
+                                        <td>{move.guess}</td>
+                                        <td>{move.message}</td>
+                                    </tr>
+                                )
+                            }
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -156,8 +168,8 @@ export default class Mastermind extends React.Component {
             const s = strSecret.charAt(i);
             for (let j = 0; j < strGuess.length; ++j) {
                 const g = strGuess.charAt(j);
-                if (s===g){
-                    if (i===j)
+                if (s === g) {
+                    if (i === j)
                         perfectMatch++;
                     else
                         partialMatch++;
