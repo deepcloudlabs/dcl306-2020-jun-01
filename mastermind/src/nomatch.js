@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-function App() {
+function NoMatch() {
   return (
       <div className="container">
         <div className="card">
@@ -9,12 +9,12 @@ function App() {
             <h3 className="card-title">Mastermind</h3>
           </div>
           <div className="card-body">
-            <h1>Welcome to the Game!</h1>
-            <Link to="/console">Go to Game Console!</Link>
+            <h1>404</h1>
+            <Link to="/">Go to Mastermind!</Link>
           </div>
         </div>
       </div>
   );
 }
 
-export default App;
+export default NoMatch;
