@@ -1,6 +1,20 @@
 import * as React from "react";
 
 export default class Mastermind extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            gameLevel: 3,
+            secret: 0,
+            tries: 0,
+            counter: 100,
+            guess: 123,
+            moves: [],
+            wins: 0,
+            loses: 0
+        };
+    }
+
     render() {
         return (
             <div className="container">
@@ -11,22 +25,25 @@ export default class Mastermind extends React.Component {
                     <div className="card-body">
                         <div className="form-group">
                             <label htmlFor="gameLevel">Game Level:
-                               <span className="badge badge-info"></span>
+                                <span className="badge badge-info">{this.state.gameLevel}</span>
                             </label>
                         </div>
                         <div className="form-group">
                             <label htmlFor="tries">Tries:
-                               <span className="badge badge-info"></span>
+                                <span className="badge badge-info">{this.state.tries}</span>
                             </label>
                         </div>
                         <div className="form-group">
                             <label htmlFor="counter">Counter:
-                               <span className="badge badge-info"></span>
+                                <span className="badge badge-info">{this.state.counter}</span>
                             </label>
                         </div>
                         <div className="form-group">
                             <label htmlFor="guess">Guess:</label>
-                            <input type="text" className="form-control"></input>
+                            <input type="text"
+                                   value={this.state.guess}
+                                   onChange={this.handleInputChange}
+                                   className="form-control"></input>
                         </div>
                         <div className="form-group">
                             <button className="btn btn-success">Play</button>
@@ -41,11 +58,11 @@ export default class Mastermind extends React.Component {
                     <div className="card-body">
                         <table className="table table-bordered table-striped table-hover table-responsive">
                             <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Guess</th>
-                                    <th>Evaluation</th>
-                                </tr>
+                            <tr>
+                                <th>No</th>
+                                <th>Guess</th>
+                                <th>Evaluation</th>
+                            </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -53,5 +70,10 @@ export default class Mastermind extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    handleInputChange = (event) => {
+        let value = Number(event.target.value);
+        this.setState({ guess: value});
     }
 }
