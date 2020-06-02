@@ -1,4 +1,5 @@
 import * as React from "react";
+import GameStatistics from "./components/game-statistics";
 
 class Move {
     constructor(guess, message, perfectMatch, partialMatch) {
@@ -96,6 +97,8 @@ export default class Mastermind extends React.Component {
                         </table>
                     </div>
                 </div>
+                <p></p>
+                <GameStatistics wins={this.state.wins} loses={this.state.loses}></GameStatistics>
             </div>
         )
     }
