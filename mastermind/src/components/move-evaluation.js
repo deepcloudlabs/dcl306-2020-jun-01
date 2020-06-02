@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import * as React from "react";
 
-export default class MoveEvaluation extends React.PureComponent {
+export default class MoveEvaluation extends React.Component {
     static propTypes = {
         perfectMatch: PropTypes.number.isRequired,
         partialMatch: PropTypes.number.isRequired
