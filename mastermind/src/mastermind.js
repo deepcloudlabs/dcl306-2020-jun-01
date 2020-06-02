@@ -1,5 +1,12 @@
 import * as React from "react";
 
+class Move {
+    constructor(guess, message, perfectMatch, partialMatch) {
+
+    }
+
+}
+
 export default class Mastermind extends React.Component {
     constructor() {
         super();
@@ -93,7 +100,7 @@ export default class Mastermind extends React.Component {
                 game.loses++;
                 this.initGame(game);
             } else {
-                // game.moves.push(this.createMove(game.guess, game.secret));
+                game.moves.push(this.createMove(game.guess, game.secret));
             }
         }
         this.setState(game);
@@ -137,5 +144,35 @@ export default class Mastermind extends React.Component {
 
     createDigit = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    createMove = (guess, secret) => {
+        // Example: secret: 549, guess: 459 -> message: "-2+1", perfectMatch: 1, partialMatch: 2
+        let perfectMatch = 0;
+        let partialMatch = 0;
+        const strSecret = secret.toString();
+        const strGuess = guess.toString();
+        for (let i = 0; i < strSecret.length; ++i) {
+            const s = strSecret.charAt(i);
+            for (let j = 0; j < strGuess.length; ++j) {
+                const g = strGuess.charAt(j);
+                if (s===g){
+                    if (i===j)
+                        perfectMatch++;
+                    else
+                        partialMatch++;
+                }
+            }
+        }
+        let message = "";
+        if (perfectMatch == 0 && partialMatch == 0)
+            message = "No Match";
+        else {
+            if (partialMatch > 0)
+                message = `-${partialMatch}`; // message = "-" + partialMatch
+            if (perfectMatch > 0)
+                message = `${message}+${perfectMatch}`;
+        }
+        return new Move(guess, message, perfectMatch, partialMatch);
     }
 }
