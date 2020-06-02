@@ -15,7 +15,7 @@ export default class ProgressBar extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.value != this.props.value) {
+        if (prevProps.value !== this.props.value) {
             let progressBarClass = "progress-bar bg-info";
             if (this.props.value < 30)
                 progressBarClass = "progress-bar bg-danger"

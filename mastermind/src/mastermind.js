@@ -1,6 +1,7 @@
 import * as React from "react";
 import GameStatistics from "./components/game-statistics";
 import ProgressBar from "./components/progressbar";
+import MoveEvaluation from "./components/move-evaluation";
 
 class Move {
     constructor(guess, message, perfectMatch, partialMatch) {
@@ -37,6 +38,40 @@ export default class Mastermind extends React.Component {
     }
 
     render() {
+        let gameStatistics = "";
+        if (this.state.wins > 0 || this.state.loses > 0) {
+            gameStatistics = <GameStatistics wins={this.state.wins} loses={this.state.loses}></GameStatistics>;
+        }
+        let movesTable = "";
+        if (this.state.moves.length > 0) {
+            movesTable = <div className="card">
+                <div className="card-header">
+                    <h3 className="card-title">Moves</h3>
+                </div>
+                <div className="card-body">
+                    <table className="table table-bordered table-striped table-hover table-responsive">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Guess</th>
+                            <th>Evaluation</th>
+                        </tr>
+                        </thead>
+                        <tbody>{
+                            this.state.moves.map((move, index) =>
+                                <tr key={move.guess}>
+                                    <td>{index + 1}</td>
+                                    <td>{move.guess}</td>
+                                    <td><MoveEvaluation partialMatch={move.partialMatch}
+                                                        perfectMatch={move.perfectMatch}></MoveEvaluation></td>
+                                </tr>
+                            )
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>;
+        }
         return (
             <div className="container">
                 <div className="card">
@@ -73,34 +108,9 @@ export default class Mastermind extends React.Component {
                     </div>
                 </div>
                 <p></p>
-                <div className="card">
-                    <div className="card-header">
-                        <h3 className="card-title">Moves</h3>
-                    </div>
-                    <div className="card-body">
-                        <table className="table table-bordered table-striped table-hover table-responsive">
-                            <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Guess</th>
-                                <th>Evaluation</th>
-                            </tr>
-                            </thead>
-                            <tbody>{
-                                this.state.moves.map((move, index) =>
-                                    <tr key={move.guess}>
-                                        <td>{index + 1}</td>
-                                        <td>{move.guess}</td>
-                                        <td>{move.message}</td>
-                                    </tr>
-                                )
-                            }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                {movesTable}
                 <p></p>
-                <GameStatistics wins={this.state.wins} loses={this.state.loses}></GameStatistics>
+                {gameStatistics}
             </div>
         )
     }
@@ -144,7 +154,7 @@ export default class Mastermind extends React.Component {
             this.initGame(game);
             this.setState(game);
         } else {
-        this.setState({counter: counter});
+            this.setState({counter: counter});
         }
     }
 
@@ -186,7 +196,7 @@ export default class Mastermind extends React.Component {
             }
         }
         let message = "";
-        if (perfectMatch == 0 && partialMatch == 0)
+        if (perfectMatch === 0 && partialMatch === 0)
             message = "No Match";
         else {
             if (partialMatch > 0)
