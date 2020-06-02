@@ -16,7 +16,9 @@ export default class Mastermind extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({secret: 123});
+        let secret = this.createSecret(this.state.gameLevel);
+        console.log(secret);
+        this.setState({secret: secret});
         setInterval(this.countDown, 1000);
     }
 
@@ -79,15 +81,34 @@ export default class Mastermind extends React.Component {
 
     handleInputChange = (event) => {
         let value = Number(event.target.value);
-        this.setState({ guess: value});
+        this.setState({guess: value});
     }
 
     countDown = () => {
         let counter = this.state.counter;
         counter--;
-        if (counter<=0){
+        if (counter <= 0) {
             //TODO: Player loses this round!
         }
         this.setState({counter: counter});
+    }
+
+    createSecret(level) {
+        let digits = [];
+        digits.push(this.createDigit(1, 9));
+        level = Number(level);
+        while (digits.length < level) {
+            let number = this.createDigit(0, 9);
+            if (!digits.includes(number))
+                digits.push(number);
+        }
+        let value = 0;
+        for (let digit of digits)
+            value = 10 * value + digit;
+        return value;
+    }
+
+    createDigit = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
