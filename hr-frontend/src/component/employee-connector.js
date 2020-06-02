@@ -15,6 +15,12 @@ let mapDispatchToProps = function(dispatch){
             showSuccessMessage("Employee is retrieved");
             return dispatch({type: "find", employee: employee})
         },
+        removeEmployee : async function(identity){
+            let employee = await fetch(`http://localhost:4001/employees/${identity}`)
+                .then(res => res.json());
+            showSuccessMessage("Employee is retrieved");
+            return dispatch({type: "find", employee: employee})
+        },
         addEmployee : async function(emp) {
             let response = await fetch("http://localhost:4001/employees",{
               method: "POST",

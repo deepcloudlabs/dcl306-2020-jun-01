@@ -96,6 +96,8 @@ export default class Employee extends React.Component {
                              onClick={ () => this.props.addEmployee(this.props.employee)}>Hire</button>
                         <button className="btn btn-warning"
                              onClick={ () => this.props.updateEmployee(this.props.employee)}>Update</button>
+                        <button className="btn btn-danger"
+                             onClick={ () => this.props.removeEmployee(this.props.employee.identityNo)}>Find</button>
                     </div>
                 </div>
 
