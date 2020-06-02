@@ -53,7 +53,9 @@ export default class Mastermind extends React.Component {
                                    className="form-control"></input>
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-success">Play</button>
+                            <button onClick={this.play}
+                                    className="btn btn-success">Play
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -77,6 +79,31 @@ export default class Mastermind extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    play = () => {
+        let game = {...this.state}
+        game.tries++;
+        if (Number(game.guess) === game.secret) {
+            game.gameLevel++;
+            game.wins++;
+            this.initGame(game);
+        } else {
+            if (game.tries >= 10) {
+                game.loses++;
+                this.initGame(game);
+            } else {
+                // game.moves.push(this.createMove(game.guess, game.secret));
+            }
+        }
+        this.setState(game);
+    }
+
+    initGame = (game) => {
+        game.tries = 0;
+        game.moves = [];
+        game.secret = this.createSecret(game.gameLevel);
+        game.counter = 100;
     }
 
     handleInputChange = (event) => {
