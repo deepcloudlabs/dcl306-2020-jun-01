@@ -2,11 +2,13 @@ import React from 'react';
 import './App.css';
 import Lottery from "./lottery";
 
-function App() {
-
-  return (
-    <Lottery />
-  );
+export default class App extends React.Component {
+  static i = 0;
+  render(){
+    App.i++;
+    console.log("App.render() " +App.i);
+    return (
+        <Lottery></Lottery>
+    );
+  }
 }
-
-export default App;

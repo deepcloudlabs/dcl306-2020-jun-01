@@ -15,19 +15,22 @@ export default class Lottery extends React.Component {
         size: 6,
         sorted: true
     }
+
     constructor(props) {
         super(props);
+        console.log("constructor(props)")
         this.state = {
             numbers: [],
-            n: 4
+            n: 1
         };
     }
 
     // View
     render() {
+        console.log("Lottery.render()")
         let table = "";
-        if (this.state.numbers.length > 0){
-            table =  <div className="card">
+        if (this.state.numbers.length > 0) {
+            table = <div className="card">
                 <div className="card-header">
                     <h1 className="card-title">Lottery Numbers</h1>
                 </div>
@@ -37,16 +40,17 @@ export default class Lottery extends React.Component {
                         <tr>
                             <th>No</th>
                             {
-                                Array.from(Array(Number(this.props.size)).keys()).map(column => <th key={'col'+column}>Column #{column+1}</th>)
+                                Array.from(Array(Number(this.props.size)).keys()).map(column => <th
+                                    key={'col' + column}>Column #{column + 1}</th>)
                             }
                             <th>Operations</th>
                         </tr>
                         </thead>
                         <tbody>{
                             this.state.numbers.map((lotteryNumber, i) => <LotteryRow numbers={lotteryNumber}
-                                                                                               removeAction={this.removeRow}
-                                                                                               key={i * this.props.size}
-                                                                                               rowIndex={i}></LotteryRow>)
+                                                                                     key={lotteryNumber.toString()}
+                                                                                     removeAction={this.removeRow}
+                                                                                     rowIndex={i}></LotteryRow>)
                         }</tbody>
                     </table>
                 </div>
@@ -116,7 +120,7 @@ export default class Lottery extends React.Component {
                 array.push(number);
         }
         if (this.props.sorted === true)
-           array.sort((x, y) => x - y);
+            array.sort((x, y) => x - y);
         return array;
     }
 
@@ -126,7 +130,7 @@ export default class Lottery extends React.Component {
 
     removeRow = (index) => {
         let numbers = this.state.numbers;
-        numbers.splice(index,1);
+        numbers.splice(index, 1);
         this.setState({
             numbers: numbers
         });
