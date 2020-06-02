@@ -1,0 +1,181 @@
+{ "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "HR API",
+    "description": "HR Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:4001",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Employees",
+      "description": "API for employees"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/employees": {
+      "post": {
+        "tags": [
+          "Employees"
+        ],
+        "description": "Create new employee in system",
+        "parameters": [
+          {
+            "name": "employee",
+            "in": "body",
+            "description": "Employee that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New employee is created",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get all employees in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Employees"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update employee",
+        "tags": [
+          "Employees"
+        ],
+        "parameters": [
+          {
+            "name": "employee",
+            "in": "body",
+            "description": "Employee that we want to update",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee is updated",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        }
+      }
+    },
+    "/employees/{identityNo}": {
+      "parameters": [
+        {
+          "name": "identityNo",
+          "in": "path",
+          "required": true,
+          "description": "Identity No of employee that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee with given Identity No",
+        "responses": {
+          "200": {
+            "description": "Employee is found",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete employee with given Identity No",
+        "tags": [
+          "Employees"
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee is deleted",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Employee": {
+      "required": [
+        "_id",
+        "identityNo",
+        "fullname",
+        "iban"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "identityNo": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "iban": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "birthYear": {
+          "type": "number"
+        },
+        "salary": {
+          "type": "number"
+        },
+        "department": {
+          "type": "string"
+        },
+        "fulltime": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Employees": {
+      "type": "array",
+      "$ref": "#/definitions/Employee"
+    }
+  }
+}
