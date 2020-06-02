@@ -93,7 +93,7 @@ export default class Mastermind extends React.Component {
         this.setState({counter: counter});
     }
 
-    createSecret(level) {
+    createSecret = (level) => {
         let digits = [];
         digits.push(this.createDigit(1, 9));
         level = Number(level);
