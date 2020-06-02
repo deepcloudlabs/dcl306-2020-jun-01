@@ -32,9 +32,9 @@ export default class Mastermind extends React.Component {
 
     componentDidMount() {
         let mastermind = localStorage.getItem("mastermind");
-        if (mastermind==null || mastermind==undefined)
-           localStorage.setItem("mastermind", JSON.stringify(this.state));
-        else{
+        if (mastermind === null || mastermind === undefined)
+            localStorage.setItem("mastermind", JSON.stringify(this.state));
+        else {
             mastermind = JSON.parse(mastermind);
             this.setState({
                 gameLevel: mastermind.gameLevel
@@ -129,7 +129,7 @@ export default class Mastermind extends React.Component {
         game.tries++;
         if (Number(game.guess) === game.secret) {
             game.gameLevel++;
-            if (game.gameLevel==10){
+            if (game.gameLevel === 10) {
                 this.props.history.push("/wins");
             }
             game.wins++;
