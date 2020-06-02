@@ -92,10 +92,10 @@ export default class Employee extends React.Component {
                     <div className="form-group">
                         <button className="btn btn-success"
                              onClick={ () => this.props.findEmployee(this.props.employee.identityNo)}>Find</button>
-                        <button className="btn btn-success"
-                             onClick={ () => this.props.addEmployee(this.props.employee)}>Find</button>
-                        <button className="btn btn-success"
-                             onClick={ () => this.props.updateEmployee(this.props.employee)}>Find</button>
+                        <button className="btn btn-warning"
+                             onClick={ () => this.props.addEmployee(this.props.employee)}>Hire</button>
+                        <button className="btn btn-warning"
+                             onClick={ () => this.props.updateEmployee(this.props.employee)}>Update</button>
                     </div>
                 </div>
 

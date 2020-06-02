@@ -6,16 +6,18 @@ export default function EmployeeReducer(state,action) {
             employee : new EmployeeModel()
         }
     }
-    let newState = {...state};
+    let newState = {...state}; // cloning object
     switch(action.type){
         case "find":
-            //TODO: Make rest call to find employee by identity
+            newState.employee = action.employee;
             break;
         case "add":
-            //TODO: Make rest call to add employee
             break;
         case "update":
-            //TODO: Make rest call to update employee
+            break;
+        case "handle":
+                newState.employee = {...state.employee};
+                newState.employee[action.event.target.name] = action.event.target.value;
             break;
         default:
             break;
