@@ -49,6 +49,13 @@ let mapDispatchToProps = function(dispatch){
         },
         handleInput : function(event){
             return dispatch({type: "handle", event});
+        },
+        handleFileInput : function(event){
+            let reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]);
+            reader.onload = (e) => {
+                dispatch({type: "handleFile", data : e.target.result });
+            }
         }
     }
 };

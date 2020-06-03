@@ -69,14 +69,17 @@ export default class Employee extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="photo">Photo:</label>
-                        <input type="file"
-                               className="form-control"
-                               name="photo"
-                               id="photo"/>
                         <img className="img-thumbnail"
                              style={{width: '128px', height: '128px'}}
                              src={this.props.employee.photo}
                              alt=""></img>
+                        <label className="btn btn-info btn-file">
+                            <input type="file"
+                                   onChange={this.props.handleFileInput}
+                                   className="form-control"
+                                   name="photo"
+                                   id="photo"/>
+                        </label>
                     </div>
                     <div className="form-group">
                         <div className="checkbox">
