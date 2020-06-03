@@ -25,7 +25,7 @@ export default class EmployeeList extends React.Component {
                         </tr>
                         </thead>
                         <tbody>{
-                         this.props.employees.map((emp,i) => <tr>
+                         this.props.employees.map((emp,i) => <tr key={emp.identity}>
                                  <td>{i+1}</td>
                              <td><img src={emp.photo}></img></td>
                              <td>{emp.identity}</td>
