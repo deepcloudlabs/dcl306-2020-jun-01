@@ -70,7 +70,11 @@ export default class Employee extends React.Component {
                     <div className="form-group">
                         <label htmlFor="photo">Photo:</label>
                         <img className="img-thumbnail"
+                             <!-- avoid object literal-->
                              style={{width: '128px', height: '128px'}}
+                             <!-- use the following
+                             style={mystyle}
+                             -->
                              src={this.props.employee.photo}
                              alt=""></img>
                         <label className="btn btn-info btn-file">

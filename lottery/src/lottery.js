@@ -16,6 +16,14 @@ export default class Lottery extends React.Component {
         sorted: true
     }
 
+    /*
+        shouldComponentUpdate(nextProps, nextState, nextContext) {
+            // mutable state -> shallow diff
+            let diff = nextState.numbers !== this.state.numbers;
+            // prop/state -> immutable
+            return diff;
+        }
+    */
     constructor(props) {
         super(props);
         console.log("constructor(props)")
@@ -85,7 +93,12 @@ export default class Lottery extends React.Component {
             </div>
         );
     }
-
+    //
+    // WebSocket -> send event (JSON) -> callback : (Near) Real-time
+    // FileReader -> callback, Fetch API -> Rest GET/PUT/DELETE -> callback
+    // user event
+    // timer event: setInterval(), setTimeout()
+    // user event
     handleInputChange = (event) => {
         let target = event.target;
         let value = target.value;

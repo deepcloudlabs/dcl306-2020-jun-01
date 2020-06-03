@@ -11,7 +11,12 @@ export default class Mastermind extends React.Component {
         super(props, context);
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextProps.game.tries != this.props.game.tries;
+    }
+
     render() {
+        console.log("Mastermind.render() is running");
         let movesTable = "";
         if (this.props.game.moves.length > 0) {
             movesTable = <div className="card">

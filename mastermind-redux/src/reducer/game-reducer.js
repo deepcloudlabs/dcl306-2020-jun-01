@@ -47,12 +47,12 @@ export default function GameReducer(state, action) { // reducer function
             statistics: new GameStatisticsModel()
         };
     }
-    let newState = {...state};
-    newState.game = {...state.game};
-    newState.statistics = {...state.statistics};
+    let newState = {...state}; // ES6
 
     switch (action.type) {
         case "play":
+            newState.game = {...state.game};
+            newState.statistics = {...state.statistics};
             newState.game.tries++;
             if (Number(newState.game.guess) === newState.game.secret) {
                 newState.game.level++;

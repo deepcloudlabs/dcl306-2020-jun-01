@@ -1,0 +1,22 @@
+{
+  "name": "binance-websocket",
+  "version": "1.0.0",
+  "description": "Binance Websocket Client and Websocket Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "start-emulator": "nodemon server-emulation.js"
+  },
+  "author": "Binnur Kurt <binnur.kurt@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.15",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
+    "socket.io": "^2.3.0",
+    "ws": "^7.3.0"
+  }
+}

@@ -14,7 +14,8 @@ let mapDispatchToProps = function(dispatch){
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "Authorization": "Bearer <JWT>"
                 }
             }).then(res => res.json())
             return dispatch({type: 'fire', employee: removedEmp})

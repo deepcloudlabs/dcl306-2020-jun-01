@@ -1,13 +1,18 @@
 import * as React from "react";
 import PropTypes from 'prop-types';
 
-export default class GameStatistics extends React.PureComponent {
+export default class GameStatistics extends React.Component {
     static propTypes = {
         wins: PropTypes.number.isRequired,
         loses: PropTypes.number.isRequired
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return this.props.wins !== nextProps.wins || this.props.loses !== nextProps.loses;
+    }
+
     render() {
+        console.log("GameStatistics.render()");
         return (
             <div className="card">
                 <div className="card-header">

@@ -1,7 +1,9 @@
 import * as React from "react";
-import GameStatistics from "./components/game-statistics";
+import * as React from "react";
+import * as React from "react";
 import ProgressBar from "./components/progressbar";
 import MoveEvaluation from "./components/move-evaluation";
+const GameStatistics = React.lazy(()=> import("./components/game-statistics") );
 
 class Move {
     constructor(guess, message, perfectMatch, partialMatch) {
@@ -13,7 +15,7 @@ class Move {
 
 }
 
-export default class Mastermind extends React.Component {
+export default class Mastermind extends React.PureComponent {
     MAX_COUNTER = 100;
 
     constructor() {
@@ -46,8 +48,19 @@ export default class Mastermind extends React.Component {
         setInterval(this.countDown, 1000);
     }
 
+/*
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextState.tries!= this.state.tries;
+    }
+*/
+    // render(): hot method
+    // lambda function becomes anonymous function -> memory!
+    // literal object -> memory
+    fun = (event) => this.handleInputChange(event,'test',42);
     render() {
+        console.log("Mastermind.render() is working...")
         let gameStatistics = "";
+        // Avoid frequent mounting/un-mounting
         if (this.state.wins > 0 || this.state.loses > 0) {
             gameStatistics = <GameStatistics wins={this.state.wins} loses={this.state.loses}></GameStatistics>;
         }
@@ -106,8 +119,9 @@ export default class Mastermind extends React.Component {
                             <label htmlFor="guess">Guess:</label>
                             <input type="text"
                                    value={this.state.guess}
-                                   onChange={this.handleInputChange}
+                                   onChange={(event) => this.handleInputChange(event,'test',42)}
                                    className="form-control"></input>
+                                   <!-- onChange={fun} -->
                         </div>
                         <div className="form-group">
                             <button onClick={this.play}
