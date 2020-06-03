@@ -6,7 +6,8 @@ export default class EmployeeList extends React.Component {
             <div className="card">
                 <div className="card-header">
                     <h1 className="card-title">Employee List</h1>
-                    <button className="btn btn-success">Retrieve All</button>
+                    <button  onClick={this.props.retrieveEmployees}
+                             className="btn btn-success">Retrieve All</button>
                 </div>
                 <div className="card-body">
                     <table className="table table-bordered table-striped">
@@ -28,14 +29,15 @@ export default class EmployeeList extends React.Component {
                          this.props.employees.map((emp,i) => <tr key={emp.identity}>
                                  <td>{i+1}</td>
                              <td><img src={emp.photo}></img></td>
-                             <td>{emp.identity}</td>
+                             <td>{emp.identityNo}</td>
                              <td>{emp.fullname}</td>
                              <td>{emp.iban}</td>
                              <td>{emp.salary}</td>
                              <td>{emp.birthYear}</td>
                              <td>{emp.department}</td>
                              <td>{emp.fulltime ? 'Fulltime' : 'Parttime'}</td>
-                             <td><button className="btn btn-danger">Fire</button></td>
+                             <td><button  onClick={() => this.props.fireEmployee(emp.identityNo)}
+                                          className="btn btn-danger">Fire</button></td>
                              </tr>
                          )
                         }

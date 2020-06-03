@@ -7,8 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import EmployeeReducer from "./reducer/employee-reducer";
+import EmployeeListReducer from "./reducer/employee-list-reducer";
 
-let reducers = combineReducers({employeeStore: EmployeeReducer});
+let reducers = combineReducers({employeeStore: EmployeeReducer, employeeListStore : EmployeeListReducer});
 
 let store = createStore(reducers);
 console.log(store.getState());
