@@ -10,9 +10,9 @@
   "author": "Binnur Kurt <binnur.kurt@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "debug": "^4.1.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "mongoose": "^5.9.15",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
